@@ -1,0 +1,46 @@
+
+<div class="container">
+
+  <h1>タグ一覧 追加</h1>
+
+  <%= form_with model: @tag, url: '/admin/tags', method: :post do |f| %>
+
+  <div class="row pt-4">
+    <div class="col">
+      <%= f.label :タグ名 %>
+    </div>
+    <div class="col">
+        <%= f.text_field :name %>
+    </div>
+    <div class="col">
+      <%= f.submit '新規登録' %>
+    </div>
+  </div>
+
+  <% end %>
+
+  <div class="row pt-4">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タグ一覧</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <% @tags.each do |tags| %>
+
+          <tbody>
+            <tr>
+              <th>
+                <%= tags.name %>
+              </th>
+            </tr>
+          </tbody>
+
+          <% end %>
+
+        </table>
+    </div>
+</div>

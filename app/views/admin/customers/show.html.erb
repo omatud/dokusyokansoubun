@@ -1,0 +1,49 @@
+管理者側顧客情報詳細
+<div class="container">
+  
+  <%= @customer.name %>さんの会員詳細
+
+  <div class="row pt-3">
+    <div class="col text-center">
+      会員ID
+    </div>
+    <div class="col">
+      <%= @customer.id%>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col text-center">
+      氏名
+    </div>
+    <div class="col">
+      <%= @customer.name %>
+    </div>
+  </div>
+
+  <div class="row pt-3">
+    <div class="col text-center">
+      メールアドレス
+    </div>
+    <div class="col">
+      <%= @customer.email %>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col text-center">
+      会員ステータス
+    </div>
+    <div class="col">
+      <% if @customer.is_deleted==false %>
+      有効
+      <% else %>
+      退会
+      <% end %>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col text-center">
+      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success" %>
+    </div>
+  </div>
+
+</div>

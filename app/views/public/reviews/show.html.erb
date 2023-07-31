@@ -1,0 +1,148 @@
+
+<div class="container">
+  <h2>レビュー詳細</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-right">
+      投稿者名
+    </div>
+    <div class="col-md-6">
+      <%= @review.customer.name %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 pt-2 text-right">
+      タイトル名
+    </div>
+    <div class="col-md-6 pt-2">
+      <%= @review.title %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 pt-2 text-right">
+      作者名
+    </div>
+    <div class="col-md-6 pt-2">
+      <%= @review.author %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 pt-2 text-right">
+      サイト名
+    </div>
+    <div class="col-md-6 pt-2">
+      <%= @review.site %>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 pt-2 text-right">
+      タグ名
+    </div>
+    <div class="col-md-6 pt-2">
+    </div>
+  </div>
+  <ul>
+  <div class="row justify-content-center">
+    <% @review.tags.each do |tag| %>
+    <div class="col pt-2">
+      <li><%= tag.name %></li>
+    </div>
+    <% end %>
+  </div>
+  </ul>
+  <div class="row justify-content-center">
+    <div class="col-md-6 pt-2 text-right">
+      レビュー
+    </div>
+    <div class="col-md-6 pt-2">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col pt-2 ">
+      <h5><%= @review.review %></h5>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>
+          レビュー
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          レビュー
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-8 pt-3 text-right">
+    <% if @review.liked_by?(current_customer) %>
+  <%# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ%>
+      いいね
+        <%= link_to review_likes_path(@review.id), method: :delete do %>
+            <span style="color:red;">❤︎</span><%= @review.likes.count %>
+    
+        <% end %>
+    <% else %>
+        <%#  一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ%>
+        いいね
+        <%= link_to review_likes_path(@review.id), method: :post do %>
+            <span>❤︎</span>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="col-3 pt-3 text-right">
+    <% if current_admin %>
+    <%= link_to'削除',review_path(@review.id), method: :delete, class:"btn btn-danger" %>
+    <% end %>
+  </div>
+</div>
+  
+  
+  <% if @review.liked_by?(current_customer) %>
+  <%# 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ%>
+  いいね
+    <%= link_to review_likes_path(@review.id), method: :delete do %>
+        <span style="color:red;">❤︎</span><%= @review.likes.count %>
+
+    <% end %>
+<% else %>
+    <%#  一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ%>
+    いいね
+    <%= link_to review_likes_path(@review.id), method: :post do %>
+        <span>❤︎</span>
+    <% end %>
+<% end %>
+</div>
+
+
+<%= form_with model:[@review,@comment] do |f| %>
+<%= f.text_area :comment, placeholder: "コメントをここに" %>
+<%= f.submit "送信" %>
+<% end %>
+
+ <% @comments.each do |comment| %>
+
+              <tbody>
+                <tr>
+                   <td>
+                      <%= comment.customer.name %>
+                  </td>
+                  <td>
+                      <%= comment.comment %>
+                  </td>
+                   <% if current_admin %>
+                   <%= link_to'削除',review_comment_path(@comment.review.id, comment), method: :delete, class:"btn btn-danger" %>
+                   <% end %>
+                </tr>
+              </tbody>
+                   
+
+
+ <% end %>
