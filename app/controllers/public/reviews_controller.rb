@@ -1,4 +1,7 @@
 class Public::ReviewsController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def new
     @review = Review.new
     @tags = Tag.all
@@ -43,8 +46,7 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    @comment = @review.comments.new
-    @comments = Comment.all
+    @comment = Comment.new
   end
 
   def edit

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
  root to: "public/homes#top"
    namespace :admin do
         resources :customers, only: [:index, :show, :edit, :update]
-        resources :reviews, only: [:show, :destroy]
+        resources :reviews, only: [:show, :destroy] do
+            resources :comments, only: [:destroy]
+        end
         resources :tags, only: [:index, :create,]
         get 'top'=>'homes#top'
    end

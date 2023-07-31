@@ -1,5 +1,7 @@
 class Admin::TagsController < ApplicationController
 
+  before_action :authenticate_admin!, except: [:top]
+
   def create
     @tag = Tag.new(tag_params)
     @tag.save

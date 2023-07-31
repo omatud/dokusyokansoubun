@@ -74,9 +74,3 @@
       </div>
     </div>
 </div>
-いいね一覧
-<% @like_reviews.each do |like_review| %>
-  <div>
-    <%= link_to like_review.title, review_path(like_review) %>
-  </div>
-<% end %>

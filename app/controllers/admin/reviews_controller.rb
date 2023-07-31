@@ -1,14 +1,16 @@
 class Admin::ReviewsController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def show
-    @revirw=Review.find(params[:id])
+    @review=Review.find(params[:id])
   end
-  
+
   def destroy
-    @review =Review.find(params[:id])
-    @review.update(review_params)
-    redirect_to admin_review_path(@review.id)
-  end  
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to admin_top_path
+  end
 
   private
 

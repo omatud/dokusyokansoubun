@@ -20,7 +20,7 @@
           <td><%= review.id %></td>
           <td><%= review.customer.name %></td>
           <td><%= review.title %></td>
-          <td><%= link_to "詳細", review_path(review.id), class:"btn btn-primary" %></td>
+          <td><%= link_to "詳細", admin_review_path(review.id), class:"btn btn-primary" %></td>
 
         </tbody>
 
